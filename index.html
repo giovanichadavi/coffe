@@ -19,11 +19,10 @@
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg);
             color: var(--dark);
-            overflow-x: hidden; /* Mencegah horizontal scroll saat animasi */
+            overflow-x: hidden; 
         }
         .font-serif { font-family: 'Bodoni Moda', serif; }
 
-        /* Animasi Teks Muncul Awal */
         .reveal-text {
             display: inline-block;
             animation: fadeInUp 1s ease forwards;
@@ -34,7 +33,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hover Teks Interaktif */
         .interactive-text {
             transition: all 0.3s ease;
             display: inline-block;
@@ -45,7 +43,6 @@
             cursor: pointer;
         }
 
-        /* Logo Floating dengan Background Oval saat Scroll */
         .logo-container {
             position: fixed;
             top: 4rem; 
@@ -63,7 +60,6 @@
             border: 1px solid rgba(188, 147, 85, 0.2);
         }
 
-        /* Video & Gambar Reveal */
         .img-reveal {
             overflow: hidden;
             border-radius: 0.5rem;
@@ -72,7 +68,6 @@
         }
         .img-reveal:hover { transform: scale(1.02); }
 
-        /* Marquee Bahasa Indonesia */
         .marquee {
             white-space: nowrap;
             overflow: hidden;
@@ -93,7 +88,6 @@
             100% { transform: translate(-50%, 0); }
         }
 
-        /* Penyesuaian AOS agar lebih smooth */
         [data-aos] {
             transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1) !important;
         }
@@ -200,7 +194,7 @@
 
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="flex gap-10 items-center">
-                    <img src="https://images.unsplash.com/photo-1594631252845-29fc4586c552?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1559496417-e7f25cb247f3?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     <div>
                         <h4 class="text-3xl font-serif italic group-hover:text-[#bc9355] transition">Dirty Chai Latte</h4>
                         <p class="text-[10px] uppercase font-bold tracking-widest opacity-40">Spiced, Sweet, Energizing</p>
@@ -244,10 +238,10 @@
             </div>
             <div>
                 <h5 class="text-[10px] font-black uppercase tracking-[0.4em] mb-8">Navigasi</h5>
-                <ul class="text-xs space-y-4 font-bold">
-                    <li class="interactive-text"><a href="#">Penyangraian</a></li>
-                    <li class="interactive-text"><a href="#">Jurnal Kopi</a></li>
-                    <li class="interactive-text"><a href="#">Kebijakan Privasi</a></li>
+                <ul class="text-xs space-y-6 font-bold">
+                    <li class="interactive-text block"><a href="#">Penyangraian</a></li>
+                    <li class="interactive-text block"><a href="#">Jurnal Kopi</a></li>
+                    <li class="interactive-text block"><a href="#">Kebijakan Privasi</a></li>
                 </ul>
             </div>
             <div>
@@ -268,9 +262,8 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Inisialisasi AOS
         AOS.init({
-            once: false, // Animasi akan terulang setiap kali scroll ke atas/bawah
+            once: false, 
             mirror: true,
             duration: 800,
             offset: 100
