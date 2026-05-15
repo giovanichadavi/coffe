@@ -45,7 +45,7 @@
         /* Logo Floating dengan Background Oval saat Scroll */
         .logo-container {
             position: fixed;
-            top: 5rem; /* Lebih rendah sedikit */
+            top: 5rem; 
             left: 1.5rem;
             z-index: 110;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -60,7 +60,7 @@
             border: 1px solid rgba(188, 147, 85, 0.2);
         }
 
-        /* Gambar Reveal */
+        /* Video & Gambar Reveal */
         .img-reveal {
             overflow: hidden;
             border-radius: 0.5rem;
@@ -120,7 +120,10 @@
 
         <div class="lg:col-span-5 relative">
             <div class="img-reveal w-full h-[500px]">
-                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover" alt="Meja Kopi">
+                <video autoplay muted loop playsinline class="w-full h-full object-cover">
+                    <source src="kopi.mp4" type="video/mp4">
+                    Browser Anda tidak mendukung tag video.
+                </video>
             </div>
             <div class="img-reveal absolute -bottom-10 -left-20 w-64 h-64 border-8 border-[#fdfcf9] hidden md:block">
                 <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Secangkir Kopi">
@@ -252,12 +255,11 @@
             </div>
         </div>
         <div class="mt-20 pt-10 border-t border-black/5 text-[9px] font-black tracking-[0.5em] uppercase opacity-30">
-            &copy; 2026 CORE COFFEE. — KOPI LEBIH BAIK, HARI LEBIH BAIK.
+            © 2026 CORE COFFEE. — KOPI LEBIH BAIK, HARI LEBIH BAIK.
         </div>
     </footer>
 
     <script>
-        // Script untuk efek scroll pada logo
         window.addEventListener('scroll', function() {
             const logo = document.getElementById('main-logo');
             if (window.scrollY > 50) {
@@ -267,7 +269,6 @@
             }
         });
 
-        // Animasi Teks pada Hover (Global)
         const allTexts = document.querySelectorAll('.reveal-text, .interactive-text');
         allTexts.forEach(text => {
             text.addEventListener('mouseover', () => {
