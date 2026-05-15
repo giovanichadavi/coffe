@@ -3,198 +3,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ManRisk — Next-Gen Risk Intelligence</title>
-    <link rel="icon" type="image/png" href="danumtaka.png">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Outfit:wght@400;600;900&display=swap" rel="stylesheet">
+    <title>Caffein & Co — The Art of Brewing</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Space Grotesk', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            black: '#050a0e',
-                            dark: '#0c141b',
-                            accent: '#10b981',
-                            glass: 'rgba(255, 255, 255, 0.03)',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Montserrat:wght@300;800&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #050a0e; color: #f8fafc; }
+        :root {
+            --coffee-black: #121212;
+            --coffee-cream: #f4f1ea;
+            --coffee-gold: #c5a47e;
+        }
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: var(--coffee-cream);
+            color: var(--coffee-black);
+        }
+        .font-serif { font-family: 'Cormorant Garamond', serif; }
         
-        /* Grained Background Effect */
-        .bg-grain {
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            opacity: 0.05;
+        /* Immersive Split Layout */
+        .split-header { height: 100vh; display: flex; overflow: hidden; }
+        .split-left { width: 40%; padding: 4rem; display: flex; flex-direction: column; justify-content: center; z-index: 10; }
+        .split-right { width: 60%; position: relative; }
+        
+        /* Overlapping Image */
+        .hero-img {
+            height: 100%; width: 100%;
+            background: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+            filter: sepia(20%) contrast(110%);
         }
 
-        .bento-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        /* Vertical Text Rotation */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            position: absolute;
+            left: 2rem; bottom: 2rem;
+            font-size: 0.75rem; font-weight: 800; letter-spacing: 0.5em; opacity: 0.3;
         }
 
-        .bento-card:hover {
-            background: rgba(16, 185, 129, 0.05);
-            border-color: rgba(16, 185, 129, 0.3);
-            transform: translateY(-5px);
+        /* Hover Reveal Effect */
+        .menu-item {
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .menu-item:hover {
+            background-color: var(--coffee-black);
+            color: var(--coffee-gold);
+            padding-left: 2rem;
         }
 
-        .text-glow {
-            text-shadow: 0 0 30px rgba(16, 185, 129, 0.5);
+        /* Side Navigation */
+        .side-nav {
+            position: fixed; right: 3rem; top: 50%;
+            transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 2rem;
+            z-index: 100;
         }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #050a0e; }
-        ::-webkit-scrollbar-thumb { background: #10b981; border-radius: 10px; }
+        .nav-dot { width: 8px; height: 8px; border: 1px solid var(--coffee-black); border-radius: 50%; }
+        .nav-dot.active { background-color: var(--coffee-gold); border-color: var(--coffee-gold); }
     </style>
 </head>
-<body class="antialiased selection:bg-emerald-500 selection:text-black">
+<body class="antialiased">
 
-    <div class="fixed inset-0 bg-grain pointer-events-none z-50"></div>
-    
-    <div class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-900/20 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[400px] h-[400px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="side-nav hidden lg:flex">
+        <a href="#home" class="nav-dot active"></a>
+        <a href="#about" class="nav-dot"></a>
+        <a href="#collection" class="nav-dot"></a>
+    </div>
 
-    <nav class="fixed top-0 w-full z-[100] p-6">
-        <div class="max-w-7xl mx-auto flex justify-between items-center bg-brand-black/50 backdrop-blur-xl border border-white/10 p-4 rounded-2xl">
-            <div class="flex items-center gap-3">
-                <img src="danumtaka.png" class="w-10 h-10 object-contain grayscale brightness-200">
-                <span class="font-display font-black text-2xl tracking-tighter">MAN<span class="text-brand-accent">RISK</span></span>
-            </div>
-            <div class="hidden md:flex gap-8 text-sm font-medium tracking-widest uppercase">
-                <a href="#vision" class="hover:text-brand-accent transition">Vision</a>
-                <a href="#intelligence" class="hover:text-brand-accent transition">Intelligence</a>
-                <a href="#matrix" class="hover:text-brand-accent transition">Matrix</a>
-            </div>
-            <button class="bg-brand-accent text-brand-black font-black px-6 py-2 rounded-xl text-sm uppercase transition hover:shadow-[0_0_20px_rgba(16,185,129,0.4)]">
-                Access
-            </button>
-        </div>
-    </nav>
-
-    <main class="relative pt-44 pb-20 px-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <header id="home" class="split-header flex-col lg:flex-row">
+        <div class="split-left bg-[#f4f1ea] relative">
+            <div class="logo font-black text-xl mb-20">C&C.</div>
             
-            <div class="lg:col-span-8 bento-card p-12 rounded-[2.5rem] flex flex-col justify-center">
-                <div class="flex items-center gap-2 mb-6">
-                    <span class="w-2 h-2 bg-brand-accent rounded-full animate-pulse"></span>
-                    <span class="text-xs font-bold tracking-[0.4em] uppercase text-brand-accent">Next-Generation Risk Management</span>
-                </div>
-                <h1 class="font-display text-6xl md:text-8xl font-black tracking-tight leading-[0.85] mb-8">
-                    DATA <br> <span class="text-glow text-brand-accent">INTELLIGENCE</span> <br> DRIVEN.
-                </h1>
-                <p class="text-slate-400 text-lg max-w-xl leading-relaxed">
-                    Digitalisasi mitigasi risiko operasional Perumda Air Minum Danum Taka dengan standar keamanan enkripsi enterprise tingkat tinggi.
-                </p>
-            </div>
+            <h1 class="font-serif italic text-7xl lg:text-9xl leading-[0.8] mb-10 -mr-32 relative z-20">
+                Taste <br> <span class="ml-20">the</span> <br> <span class="text-[#c5a47e]">Origin.</span>
+            </h1>
+            
+            <p class="text-sm tracking-widest leading-loose opacity-60 mb-10 max-w-xs">
+                EST. 2020 — BIJI KOPI TERBAIK YANG DISANGRAI DENGAN METODE TRADISIONAL UNTUK JIWA YANG MODERN.
+            </p>
 
-            <div class="lg:col-span-4 bg-brand-accent rounded-[2.5rem] p-10 flex flex-col justify-between items-start group cursor-pointer overflow-hidden relative">
-                <div class="z-10">
-                    <h2 class="text-brand-black text-4xl font-black leading-tight uppercase">Analyze <br> Your Risk <br> Now.</h2>
-                </div>
-                <div class="z-10 mt-20">
-                    <div class="w-16 h-16 bg-brand-black rounded-full flex items-center justify-center text-brand-accent transition-transform group-hover:rotate-45">
-                        <i class="fa-solid fa-arrow-right text-2xl"></i>
-                    </div>
-                </div>
-                <i class="fa-solid fa-shield-halved absolute -right-10 -bottom-10 text-[15rem] text-brand-black/10 rotate-12 transition-transform group-hover:scale-110"></i>
+            <div class="flex gap-6">
+                <button class="bg-[#121212] text-white px-8 py-4 text-xs font-extrabold uppercase tracking-widest hover:bg-[#c5a47e] transition">
+                    The Journal
+                </button>
             </div>
-
-            <div id="matrix" class="lg:col-span-4 bento-card p-8 rounded-[2.5rem]">
-                <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-table-cells text-brand-accent"></i> Risk Matrix
-                </h3>
-                <div class="aspect-square grid grid-cols-5 gap-1">
-                    <div class="bg-emerald-500/20 rounded"></div><div class="bg-emerald-500/20 rounded"></div><div class="bg-yellow-500/20 rounded"></div><div class="bg-orange-500/20 rounded"></div><div class="bg-rose-500/40 rounded"></div>
-                    <div class="bg-emerald-500/20 rounded"></div><div class="bg-yellow-500/20 rounded"></div><div class="bg-orange-500/20 rounded"></div><div class="bg-rose-500/40 rounded"></div><div class="bg-rose-500/60 rounded"></div>
-                    <div class="bg-yellow-500/20 rounded"></div><div class="bg-orange-500/20 rounded"></div><div class="bg-rose-500/40 rounded"></div><div class="bg-rose-500/60 rounded"></div><div class="bg-rose-600 rounded"></div>
-                </div>
-                <p class="text-xs text-slate-500 mt-6 uppercase tracking-widest font-bold">Scientific Probability Assessment</p>
-            </div>
-
-            <div class="lg:col-span-4 bento-card p-8 rounded-[2.5rem] flex flex-col justify-between">
-                <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-brand-accent mb-6">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <div>
-                    <h4 class="text-2xl font-bold mb-2">Real-time Logging</h4>
-                    <p class="text-slate-500 text-sm">Setiap mutasi data dicatat secara otomatis dalam sistem audit transparan.</p>
-                </div>
-            </div>
-
-            <div class="lg:col-span-4 bento-card p-8 rounded-[2.5rem] flex flex-col justify-between">
-                <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-blue-400 mb-6">
-                    <i class="fa-solid fa-file-invoice"></i>
-                </div>
-                <div>
-                    <h4 class="text-2xl font-bold mb-2">Auto Report</h4>
-                    <p class="text-slate-500 text-sm">Generate Risk Register Report hanya dengan satu klik perintah sistem.</p>
-                </div>
-            </div>
-
         </div>
-    </main>
 
-    <section class="max-w-7xl mx-auto px-6 mb-20">
-        <div class="bento-card rounded-[3rem] overflow-hidden">
-            <div class="p-12 border-b border-white/5">
-                <h2 class="font-display text-4xl font-black uppercase">Standard Evaluation</h2>
+        <div class="split-right">
+            <div class="hero-img"></div>
+            <div class="vertical-text">CAFFEIN & CO — ROASTERY & SPACE</div>
+            
+            <div class="absolute -bottom-10 -left-20 bg-white p-10 shadow-2xl hidden md:block max-w-xs border-t-8 border-[#c5a47e]">
+                <span class="text-xs font-black tracking-widest opacity-40 uppercase">Brewing Now</span>
+                <h4 class="text-xl font-bold mt-2">Ethiopia Guji G1</h4>
+                <p class="text-xs mt-4 opacity-70">Notes: Jasmine, Bergamot, and Sweet Honey finish.</p>
             </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead class="bg-white/5 text-[10px] uppercase tracking-[0.3em] font-bold">
-                        <tr>
-                            <th class="p-6">Likelihood / Impact</th>
-                            <th class="p-6">Jarang (1)</th>
-                            <th class="p-6">Kecil (2)</th>
-                            <th class="p-6">Sedang (3)</th>
-                            <th class="p-6">Besar (4)</th>
-                            <th class="p-6">Pasti (5)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-white/5 text-sm font-medium">
-                        <tr>
-                            <td class="p-6 bg-white/5 font-black uppercase">Dahsyat (5)</td>
-                            <td class="p-6 text-rose-500 font-bold">9 - EKSTRIM</td>
-                            <td class="p-6 text-rose-500 font-bold">15 - EKSTRIM</td>
-                            <td class="p-6 text-rose-500 font-bold">18 - EKSTRIM</td>
-                            <td class="p-6 text-rose-500 font-bold">23 - EKSTRIM</td>
-                            <td class="p-6 text-rose-500 font-bold">25 - EKSTRIM</td>
-                        </tr>
-                        <tr>
-                            <td class="p-6 bg-white/5 font-black uppercase">Besar (4)</td>
-                            <td class="p-6 text-orange-500 font-bold">6 - TINGGI</td>
-                            <td class="p-6 text-orange-500 font-bold">12 - TINGGI</td>
-                            <td class="p-6 text-orange-500 font-bold">16 - TINGGI</td>
-                            <td class="p-6 text-rose-500 font-bold">20 - EKSTRIM</td>
-                            <td class="p-6 text-rose-500 font-bold">24 - EKSTRIM</td>
-                        </tr>
-                    </tbody>
-                </table>
+        </div>
+    </header>
+
+    <section id="collection" class="py-32 px-6 lg:px-20 bg-[#121212] text-[#f4f1ea]">
+        <div class="flex flex-col lg:flex-row justify-between items-end mb-20 gap-10">
+            <h2 class="font-serif italic text-6xl lg:text-8xl">The Daily <br> Ritual</h2>
+            <div class="max-w-md text-right">
+                <p class="text-sm opacity-60 italic mb-4">"Kopi bukan hanya minuman, tapi jeda di antara kekacauan dunia."</p>
+                <a href="#" class="text-[#c5a47e] font-bold uppercase tracking-widest text-xs border-b border-[#c5a47e]">Explore Menu</a>
+            </div>
+        </div>
+
+        <div class="flex flex-col">
+            <div class="menu-item py-10 flex justify-between items-center group">
+                <div class="flex items-baseline gap-10">
+                    <span class="text-xs font-bold opacity-30">01</span>
+                    <h3 class="text-3xl lg:text-5xl font-serif">Black Gold Espresso</h3>
+                </div>
+                <div class="text-right">
+                    <span class="text-xl font-light">IDR 28K</span>
+                </div>
+            </div>
+
+            <div class="menu-item py-10 flex justify-between items-center group">
+                <div class="flex items-baseline gap-10">
+                    <span class="text-xs font-bold opacity-30">02</span>
+                    <h3 class="text-3xl lg:text-5xl font-serif">Cloud Milk Latte</h3>
+                </div>
+                <div class="text-right">
+                    <span class="text-xl font-light">IDR 35K</span>
+                </div>
+            </div>
+
+            <div class="menu-item py-10 flex justify-between items-center group">
+                <div class="flex items-baseline gap-10">
+                    <span class="text-xs font-bold opacity-30">03</span>
+                    <h3 class="text-3xl lg:text-5xl font-serif">Slow Brew V60</h3>
+                </div>
+                <div class="text-right">
+                    <span class="text-xl font-light">IDR 32K</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <footer class="p-10 border-t border-white/5 text-center">
-        <div class="max-w-7xl mx-auto flex flex-col items-center">
-            <img src="danumtaka.png" class="w-12 h-12 grayscale opacity-30 mb-6">
-            <div class="text-[10px] font-bold tracking-[0.5em] text-slate-600 uppercase">
-                &copy; 2026 Perumda Air Minum Danum Taka. Precision Audit System.
+    <footer id="about" class="py-20 px-6 lg:px-20 bg-[#f4f1ea] border-t border-black/5">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-20">
+            <div class="col-span-2">
+                <h3 class="text-sm font-black tracking-[0.5em] uppercase mb-10">Visit our Roastery</h3>
+                <p class="text-4xl lg:text-6xl font-serif italic mb-10 max-w-2xl">
+                    Satu cangkir untuk mengawali hari, ribuan cerita untuk mengakhiri malam.
+                </p>
+                <div class="flex gap-10 text-xs font-extrabold uppercase tracking-widest">
+                    <a href="#" class="hover:text-[#c5a47e]">Instagram</a>
+                    <a href="#" class="hover:text-[#c5a47e]">WhatsApp</a>
+                    <a href="#" class="hover:text-[#c5a47e]">Spotify</a>
+                </div>
             </div>
+            
+            <div class="bg-white p-10 shadow-xl self-start">
+                <h4 class="font-black text-xs uppercase mb-6 tracking-widest">Open Hours</h4>
+                <p class="text-sm mb-4">Monday — Friday: 08:00 - 22:00</p>
+                <p class="text-sm mb-10">Weekend Bloom: 09:00 - 23:00</p>
+                <button class="w-full bg-black text-white py-4 text-[10px] font-bold uppercase tracking-widest">Find Location</button>
+            </div>
+        </div>
+        
+        <div class="mt-20 pt-10 border-t border-black/5 flex justify-between items-center text-[10px] font-bold opacity-40 uppercase tracking-[0.3em]">
+            <span>© 2026 Caffein & Co.</span>
+            <span>Crafted for Curated Souls</span>
         </div>
     </footer>
 
