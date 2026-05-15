@@ -1,263 +1,182 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Caffein & Co — Immersive Coffee Experience</title>
-<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-<link rel="stylesheet" href="[https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css](https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css)">
-<link href="[https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@100;300;400;600;800;900&display=swap](https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@100;300;400;600;800;900&display=swap)" rel="stylesheet">
-<script>
-tailwind.config = {
-theme: {
-extend: {
-fontFamily: {
-sans: ['Montserrat', 'sans-serif'],
-serif: ['Cormorant Garamond', 'serif'],
-},
-colors: {
-coffee: {
-dark: '#0e0a08',
-black: '#1a1411',
-brown: '#3d2b21',
-gold: '#cba37c',
-cream: '#f9f6f1',
-white: '#ffffff',
-}
-},
-letterSpacing: {
-'mega': '0.3em',
-'giga': '0.5em',
-},
-fontSize: {
-'10xl': '10rem',
-'12xl': '12rem',
-}
-}
-}
-}
-</script>
-<style>
-body {
-background-color: #f9f6f1; /* coffee-cream */
-color: #1a1411; /* coffee-black */
-}
-/* Grained Texture Overlay */
-body::before {
-content: "";
-position: fixed;
-top: 0; left: 0; width: 100%; height: 100%;
-background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-opacity: 0.04;
-pointer-events: none;
-z-index: 50;
-}
-/* Full Height Split Layout */
-.immersive-split {
-height: 100vh;
-display: flex;
-overflow: hidden;
-position: relative;
-}
-.split-left {
-width: 45%;
-padding: 4rem;
-display: flex;
-flex-direction: column;
-justify-content: center;
-z-index: 20;
-background-color: #f9f6f1; /* coffee-cream */
-}
-.split-right {
-width: 55%;
-position: relative;
-}
-/* Fixed Background Images for Split */
-.immersive-bg-1 {
-background-image: linear-gradient(rgba(14,10,8,0.1), rgba(14,10,8,0.3)), url('https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&w=1200&q=80'); /* Modern Latte Art */
-background-size: cover;
-background-position: center;
-}
-/* Large Overlapping Headline */
-.hero-headline {
-position: absolute;
-bottom: 5vh;
-left: 35%;
-width: 70%;
-z-index: 30;
-line-height: 0.8;
-pointer-events: none;
-}
-/* Floating Element */
-.floating-orb {
-position: absolute;
-width: 200px; height: 200px;
-background: radial-gradient(circle, rgba(203,163,124,0.15) 0%, transparent 70%);
-border-radius: 50%;
-pointer-events: none;
-z-index: 10;
-}
-/* Vertical Navigation */
-.vertical-nav {
-position: fixed;
-left: 2rem;
-top: 50%;
-transform: translateY(-50%);
-display: flex;
-flex-direction: column;
-gap: 2.5rem;
-z-index: 100;
-}
-.vertical-nav-item {
-display: flex;
-align-items: center;
-gap: 1rem;
-writing-mode: vertical-rl;
-transform: rotate(180deg);
-opacity: 0.4;
-transition: all 0.4s ease;
-}
-.vertical-nav-item:hover { opacity: 1; }
-.vertical-nav-item.active { opacity: 1; font-weight: 800; color: #cba37c; }
-.nav-dot { width: 6px; height: 6px; border-radius: 50%; background-color: #1a1411; }
-.vertical-nav-item.active .nav-dot { background-color: #cba37c; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffein & Co — Editorial Coffee Space</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,900&family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fdfcf9;
+            --dark: #1a1a1a;
+            --accent: #bc9355;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg);
+            color: var(--dark);
+        }
+        .font-serif { font-family: 'Bodoni Moda', serif; }
+
+        /* Floating Image Style */
+        .img-reveal {
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .img-reveal:hover { transform: scale(1.02); }
+
+        /* Custom Marquee for flair */
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            background: var(--dark);
+            color: var(--bg);
+            padding: 1rem 0;
+            font-weight: 900;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, 0); }
+        }
+    </style>
 </head>
-<body class="antialiased selection:bg-coffee-gold selection:text-coffee-dark">
-<div class="vertical-nav hidden lg:flex font-extrabold text-[10px] uppercase tracking-mega">
-<a href="#home" class="vertical-nav-item active">
-<span>THE ORIGIN</span>
-<span class="nav-dot"></span>
-</a>
-<a href="#roastery" class="vertical-nav-item">
-<span>THE CRAFT</span>
-<span class="nav-dot"></span>
-</a>
-<a href="#ritual" class="vertical-nav-item">
-<span>THE RITUAL</span>
-<span class="nav-dot"></span>
-</a>
-<a href="#visit" class="vertical-nav-item">
-<span>VISIT US</span>
-<span class="nav-dot"></span>
-</a>
-</div>
-<div class="floating-orb" style="top: 15%; left: 10%;"></div>
-<div class="floating-orb" style="bottom: 10%; right: 15%;"></div>
-<header id="home" class="immersive-split flex-col lg:flex-row">
-<div class="split-left bg-coffee-cream">
-<div class="flex items-center gap-3 mb-24">
-<div class="text-xs font-light tracking-widest leading-none">CAFFEIN
-&CO.</div>
-<div class="h-10 w-px bg-coffee-black opacity-20"></div>
-<div class="text-xs font-black tracking-giga opacity-60">EST. 2020</div>
-</div>
-<h1 class="text-base font-black tracking-mega uppercase opacity-40 mb-10">CURATED URBAN ROASTERY</h1>
-<p class="max-w-xs text-sm leading-relaxed opacity-70 mb-16">
-Eksplorasi rasa dari biji kopi pilihan dunia, disangrai dengan presisi tinggi di jantung kota.
-</p>
-<button class="w-full sm:w-auto bg-coffee-black text-coffee-cream px-10 py-5 text-xs font-extrabold uppercase tracking-widest transition-all duration-300 hover:bg-coffee-gold hover:text-coffee-dark hover:shadow-[0_0_30px_rgba(203,163,124,0.4)]">
-Access Roastery Journal
-</button>
-</div>
-<div class="split-right immersive-bg-1"></div>
-<h1 class="hero-headline font-serif text-8xl md:text-10xl lg:text-12xl italic text-coffee-cream group">
-Taste
+<body class="antialiased">
 
-<span class="md:ml-[15%]">the</span>
+    <div class="marquee fixed top-0 w-full z-[100]">
+        <div class="marquee-content">
+            CRAFTED BEANS — SLOW BAR EXPERIENCE — LOCALLY ROASTED — PREMIUM SELECTION — CRAFTED BEANS — SLOW BAR EXPERIENCE — LOCALLY ROASTED — PREMIUM SELECTION —
+        </div>
+    </div>
 
-<span class="md:ml-[30%] text-coffee-gold transition-all duration-500 group-hover:tracking-mega">Craft.</span>
-</h1>
-</header>
-<section id="roastery" class="py-32 px-6 lg:px-20 bg-coffee-cream">
-<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-<div class="space-y-6">
-<div class="flex gap-4 items-center">
-<img src="[https://images.unsplash.com/photo-1514432324605-885077460298?auto=format&fit=crop&w=400&q=80](https://images.unsplash.com/photo-1514432324605-885077460298?auto=format&fit=crop&w=400&q=80)" alt="Specialty Coffee Beans" class="w-1/2 h-64 object-cover rounded shadow-lg border border-coffee-black/10">
-<img src="[https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80](https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=400&q=80)" alt="Craft Espresso Cup" class="w-1/2 h-64 object-cover rounded shadow-lg border border-coffee-black/10 mt-16">
-</div>
-</div>
-<div class="space-y-8">
-<span class="text-xs font-black tracking-widest uppercase text-coffee-gold">The Roastery Journal</span>
-<h2 class="font-serif italic text-6xl leading-[0.9] text-coffee-dark">Presisi dalam Setiap Sangraian.</h2>
-<p class="text-sm leading-relaxed text-coffee-brown/80 max-w-xl">Kami tidak hanya menyeduh kopi; kami mengkurasi pengalaman. Menggunakan metode profil roasting kustom untuk setiap varietas biji kopi, kami menonjolkan karakter rasa unik yang tersimpan di dalamnya.</p>
-<div class="flex gap-4 pt-4 text-xs font-extrabold uppercase tracking-widest text-coffee-dark">
-<span class="border border-coffee-dark/20 px-4 py-2 rounded">Jasmine Notes</span>
-<span class="border border-coffee-dark/20 px-4 py-2 rounded">Guatemalan Origin</span>
-<span class="border border-coffee-dark/20 px-4 py-2 rounded">Micro Batch</span>
-</div>
-</div>
-</div>
-</section>
-<section id="ritual" class="py-32 px-6 lg:px-20 bg-coffee-dark text-coffee-cream">
-<div class="max-w-7xl mx-auto">
-<div class="grid grid-cols-1 md:grid-cols-12 gap-10 mb-20 items-end">
-<h2 class="md:col-span-8 font-serif italic text-7xl lg:text-9xl leading-[0.8] text-coffee-cream group">
-<span class="text-coffee-gold transition-all duration-300 group-hover:ml-10">Daily</span> 
+    <section class="min-h-screen pt-32 pb-20 px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7 z-10">
+            <h2 class="text-xs font-black tracking-[0.6em] uppercase mb-8 text-[#bc9355]">The Daily Roast</h2>
+            <h1 class="font-serif italic text-7xl md:text-[10rem] leading-[0.8] mb-12">
+                Pure <br> 
+                <span class="lg:ml-32">Essence.</span>
+            </h1>
+            <p class="max-w-md text-sm leading-relaxed opacity-60 mb-12 italic">
+                "Kami mengambil biji kopi dari tempat yang paling sulit dijangkau, untuk memberikan rasa yang paling sulit Anda lupakan."
+            </p>
+            <div class="flex gap-4">
+                <a href="#menu" class="bg-black text-white px-10 py-5 text-[10px] font-black uppercase tracking-widest hover:bg-[#bc9355] transition">Explore Menu</a>
+            </div>
+        </div>
 
-Ritual.
-</h2>
-<p class="md:col-span-4 text-xs tracking-widest font-bold uppercase opacity-60 text-right">notes: precision & flow</p>
-</div>
-<div class="space-y-0 border-t border-coffee-cream/10">
-<a href="#" class="block py-10 group border-b border-coffee-cream/10 transition-all duration-400 hover:bg-coffee-black hover:px-8 relative overflow-hidden">
-<div class="flex justify-between items-baseline gap-10">
-<div class="flex items-baseline gap-10">
-<span class="text-xs font-extrabold tracking-widest opacity-30">01</span>
-<h3 class="text-4xl lg:text-5xl font-serif text-coffee-cream group-hover:text-coffee-gold">Black Gold Espresso</h3>
-</div>
-<span class="text-2xl font-light text-coffee-cream tracking-widest group-hover:text-coffee-gold transition">28K</span>
-</div>
-</a>
-<a href="#" class="block py-10 group border-b border-coffee-cream/10 transition-all duration-400 hover:bg-coffee-black hover:px-8 relative overflow-hidden">
-<div class="flex justify-between items-baseline gap-10">
-<div class="flex items-baseline gap-10">
-<span class="text-xs font-extrabold tracking-widest opacity-30">02</span>
-<h3 class="text-4xl lg:text-5xl font-serif text-coffee-cream group-hover:text-coffee-gold">Cloud Milk Latte</h3>
-</div>
-<span class="text-2xl font-light text-coffee-cream tracking-widest group-hover:text-coffee-gold transition">35K</span>
-</div>
-</a>
-<a href="#" class="block py-10 group border-b border-coffee-cream/10 transition-all duration-400 hover:bg-coffee-black hover:px-8 relative overflow-hidden">
-<div class="flex justify-between items-baseline gap-10">
-<div class="flex items-baseline gap-10">
-<span class="text-xs font-extrabold tracking-widest opacity-30">03</span>
-<h3 class="text-4xl lg:text-5xl font-serif text-coffee-cream group-hover:text-coffee-gold">Slow Brew V60 Origin</h3>
-</div>
-<span class="text-2xl font-light text-coffee-cream tracking-widest group-hover:text-coffee-gold transition">32K</span>
-</div>
-</a>
-</div>
-</div>
-</section>
-<footer id="visit" class="py-24 px-6 lg:px-20 bg-coffee-cream border-t border-coffee-black/5">
-<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-20 items-start">
-<div class="col-span-2 space-y-8">
-<span class="text-xs font-black tracking-giga uppercase opacity-40 mb-4 block">Our Journal</span>
-<p class="font-serif italic text-6xl leading-[0.9] text-coffee-dark max-w-xl">Cangkir yang mengkurasi momen tenang di tengah riuh kota.</p>
-<div class="flex gap-10 text-xs font-extrabold uppercase tracking-widest text-coffee-dark">
-<a href="#" class="hover:text-coffee-gold transition">Instagram</a>
-<a href="#" class="hover:text-coffee-gold transition">TikTok</a>
-<a href="#" class="hover:text-coffee-gold transition">Spotify</a>
-</div>
-</div>
-<div class="bg-coffee-white p-10 shadow-2xl border border-coffee-black/5 rounded group">
-<div class="flex justify-between items-center mb-10">
-<h4 class="font-black text-xs uppercase tracking-widest text-coffee-dark">OPEN HOURS</h4>
-<span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
-</div>
-<div class="space-y-3 text-sm text-coffee-brown/80 mb-10">
-<p class="flex justify-between"><span>Mon — Fri</span> <span>08:00 - 22:00</span></p>
-<p class="flex justify-between font-bold text-coffee-dark"><span>Sat — Sun</span> <span>09:00 - 23:00</span></p>
-</div>
-<button class="w-full bg-coffee-dark text-coffee-cream py-4 text-[10px] font-extrabold uppercase tracking-mega transition hover:bg-coffee-gold hover:text-coffee-dark">
-FIND US ON MAP
-</button>
-</div>
-</div>
-<div class="max-w-7xl mx-auto text-center mt-20 pt-10 border-t border-coffee-black/5">
-<span class="text-[10px] font-bold tracking-[0.5em] uppercase opacity-30 text-coffee-dark">© 2026 CAFFEIN & CO. — Immersive Coffee Space.</span>
-</div>
-</footer>
+        <div class="lg:col-span-5 relative">
+            <div class="img-reveal w-full h-[500px]">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover" alt="Coffee Table">
+            </div>
+            <div class="img-reveal absolute -bottom-10 -left-20 w-64 h-64 border-8 border-[#fdfcf9] hidden md:block">
+                <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Cup of Coffee">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center bg-[#1a1a1a] text-white">
+        <div class="order-2 lg:order-1">
+            <h3 class="font-serif italic text-6xl mb-10 leading-tight">Diseduh dengan <br> <span class="text-[#bc9355]">Sempurna.</span></h3>
+            <p class="opacity-60 text-sm leading-loose mb-10">
+                Setiap cangkir adalah hasil dari perhitungan suhu yang tepat, berat biji yang konsisten, dan curahan air yang tenang. Tim roaster kami bekerja dalam batch kecil untuk memastikan profil rasa jasmine, citrus, dan chocolate notes muncul secara maksimal.
+            </p>
+            <ul class="space-y-4 font-bold text-xs uppercase tracking-widest text-[#bc9355]">
+                <li><i class="fa-solid fa-check mr-2"></i> Single Origin Ethiopia</li>
+                <li><i class="fa-solid fa-check mr-2"></i> Manual Brew V60</li>
+                <li><i class="fa-solid fa-check mr-2"></i> Signature Sea Salt Latte</li>
+            </ul>
+        </div>
+        <div class="order-1 lg:order-2 grid grid-cols-2 gap-4">
+            <div class="img-reveal h-80 mt-12">
+                <img src="https://images.unsplash.com/photo-1541167760496-162955ed8a9f?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Latte Art">
+            </div>
+            <div class="img-reveal h-80">
+                <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Pour Over">
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-32 px-6 lg:px-20 max-w-7xl mx-auto">
+        <div class="flex justify-between items-end mb-20">
+            <h2 class="font-serif italic text-7xl">The Bar.</h2>
+            <span class="text-xs font-black tracking-widest opacity-40 uppercase pb-4">Specialty Selection</span>
+        </div>
+
+        <div class="space-y-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer">
+                <div class="flex gap-10 items-center">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div>
+                        <h4 class="text-3xl font-serif italic group-hover:text-[#bc9355] transition">House Black Coffee</h4>
+                        <p class="text-[10px] uppercase font-bold tracking-widest opacity-40">Clean, Fruity, Bold</p>
+                    </div>
+                </div>
+                <div class="mt-4 md:mt-0 font-serif text-2xl">IDR 28K</div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer">
+                <div class="flex gap-10 items-center">
+                    <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div>
+                        <h4 class="text-3xl font-serif italic group-hover:text-[#bc9355] transition">Velvet Oat Latte</h4>
+                        <p class="text-[10px] uppercase font-bold tracking-widest opacity-40">Creamy, Smooth, Nutty</p>
+                    </div>
+                </div>
+                <div class="mt-4 md:mt-0 font-serif text-2xl">IDR 35K</div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer">
+                <div class="flex gap-10 items-center">
+                    <img src="https://images.unsplash.com/photo-1544787210-282dc2bc51f2?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <div>
+                        <h4 class="text-3xl font-serif italic group-hover:text-[#bc9355] transition">Cold Brew Tonic</h4>
+                        <p class="text-[10px] uppercase font-bold tracking-widest opacity-40">Fresh, Citrus, Sparkling</p>
+                    </div>
+                </div>
+                <div class="mt-4 md:mt-0 font-serif text-2xl">IDR 32K</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 px-6 lg:px-20 border-t border-black/5 bg-[#fdfcf9]">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-20">
+            <div class="md:col-span-2">
+                <h1 class="logo font-serif italic text-4xl mb-10">C&C.</h1>
+                <p class="max-w-xs text-xs leading-loose opacity-60 uppercase tracking-widest">
+                    Jl. Propinsi No. 123, Penajam, <br> Kalimantan Timur, Indonesia.
+                </p>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-black uppercase tracking-[0.4em] mb-8">Navigation</h5>
+                <ul class="text-xs space-y-4 font-bold">
+                    <li><a href="#" class="hover:text-[#bc9355]">The Roastery</a></li>
+                    <li><a href="#" class="hover:text-[#bc9355]">Coffee Journal</a></li>
+                    <li><a href="#" class="hover:text-[#bc9355]">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-[10px] font-black uppercase tracking-[0.4em] mb-8">Say Hello</h5>
+                <ul class="text-xs space-y-4 font-bold">
+                    <li><a href="#" class="hover:text-[#bc9355]">Instagram</a></li>
+                    <li><a href="#" class="hover:text-[#bc9355]">WhatsApp</a></li>
+                    <li><a href="#" class="hover:text-[#bc9355]">hello@caffeineco.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-20 pt-10 border-t border-black/5 text-[9px] font-black tracking-[0.5em] uppercase opacity-30">
+            &copy; 2026 CAFFEIN & CO. — BETTER COFFEE, BETTER DAYS.
+        </div>
+    </footer>
+
 </body>
 </html>
