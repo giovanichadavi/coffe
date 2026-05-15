@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,900&family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         :root {
             --bg: #fdfcf9;
@@ -17,10 +19,11 @@
             font-family: 'Inter', sans-serif; 
             background-color: var(--bg);
             color: var(--dark);
+            overflow-x: hidden; /* Mencegah horizontal scroll saat animasi */
         }
         .font-serif { font-family: 'Bodoni Moda', serif; }
 
-        /* Animasi Teks Muncul */
+        /* Animasi Teks Muncul Awal */
         .reveal-text {
             display: inline-block;
             animation: fadeInUp 1s ease forwards;
@@ -45,7 +48,7 @@
         /* Logo Floating dengan Background Oval saat Scroll */
         .logo-container {
             position: fixed;
-            top: 4rem; /* Jarak atas logo dikurangi */
+            top: 4rem; 
             left: 1.5rem;
             z-index: 110;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -89,6 +92,11 @@
             0% { transform: translate(0, 0); }
             100% { transform: translate(-50%, 0); }
         }
+
+        /* Penyesuaian AOS agar lebih smooth */
+        [data-aos] {
+            transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1) !important;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -104,7 +112,7 @@
     </div>
 
     <section class="min-h-screen pt-48 pb-20 px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        <div class="lg:col-span-7 z-10">
+        <div class="lg:col-span-7 z-10" data-aos="fade-right" data-aos-duration="1200">
             <h2 class="text-xs font-black tracking-[0.6em] uppercase mb-8 text-[#bc9355] reveal-text" style="animation-delay: 0.2s;">Sajian Harian</h2>
             <h1 class="font-serif italic text-7xl md:text-[10rem] leading-[0.8] mb-12 reveal-text" style="animation-delay: 0.4s;">
                 Esensi <br> 
@@ -118,7 +126,7 @@
             </div>
         </div>
 
-        <div class="lg:col-span-5 relative">
+        <div class="lg:col-span-5 relative" data-aos="zoom-in-left" data-aos-duration="1500">
             <div class="img-reveal w-full h-[500px]">
                 <video autoplay muted loop playsinline class="w-full h-full object-cover">
                     <source src="kopi.mp4" type="video/mp4">
@@ -129,7 +137,7 @@
     </section>
 
     <section class="py-32 px-6 lg:px-20 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center bg-[#1a1a1a] text-white">
-        <div class="order-2 lg:order-1">
+        <div class="order-2 lg:order-1" data-aos="fade-up" data-aos-delay="200">
             <h3 class="font-serif italic text-6xl mb-10 leading-tight interactive-text">Diseduh dengan <br> <span class="text-[#bc9355]">Sempurna.</span></h3>
             <p class="opacity-60 text-sm leading-loose mb-10">
                 Setiap cangkir adalah hasil dari perhitungan suhu yang tepat, berat biji yang konsisten, dan curahan air yang tenang. Tim roaster kami bekerja dalam batch kecil untuk memastikan profil rasa muncul secara maksimal.
@@ -141,23 +149,23 @@
             </ul>
         </div>
         <div class="order-1 lg:order-2 grid grid-cols-2 gap-4">
-            <div class="img-reveal h-80 mt-12">
+            <div class="img-reveal h-80 mt-12" data-aos="reveal-left" data-aos-delay="400">
                 <img src="https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Seni Latte">
             </div>
-            <div class="img-reveal h-80">
+            <div class="img-reveal h-80" data-aos="reveal-right" data-aos-delay="600">
                 <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover" alt="Seduh Kopi">
             </div>
         </div>
     </section>
 
     <section id="menu" class="py-32 px-6 lg:px-20 max-w-7xl mx-auto">
-        <div class="flex justify-between items-end mb-20">
+        <div class="flex justify-between items-end mb-20" data-aos="fade-down">
             <h2 class="font-serif italic text-7xl interactive-text">The Bar.</h2>
             <span class="text-xs font-black tracking-widest opacity-40 uppercase pb-4">Price</span>
         </div>
 
         <div class="space-y-12">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4" data-aos="fade-up" data-aos-delay="100">
                 <div class="flex gap-10 items-center">
                     <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     <div>
@@ -168,7 +176,7 @@
                 <div class="mt-4 md:mt-0 font-serif text-2xl group-hover:scale-110 transition">28K</div>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4" data-aos="fade-up" data-aos-delay="200">
                 <div class="flex gap-10 items-center">
                     <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     <div>
@@ -179,7 +187,7 @@
                 <div class="mt-4 md:mt-0 font-serif text-2xl group-hover:scale-110 transition">35K</div>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4" data-aos="fade-up" data-aos-delay="300">
                 <div class="flex gap-10 items-center">
                     <img src="https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     <div>
@@ -190,7 +198,7 @@
                 <div class="mt-4 md:mt-0 font-serif text-2xl group-hover:scale-110 transition">32K</div>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4" data-aos="fade-up" data-aos-delay="400">
                 <div class="flex gap-10 items-center">
                     <img src="https://images.unsplash.com/photo-1594631252845-29fc4586c552?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     <div>
@@ -201,7 +209,7 @@
                 <div class="mt-4 md:mt-0 font-serif text-2xl group-hover:scale-110 transition">38K</div>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center py-8 border-b border-black/10 group cursor-pointer transition-all hover:px-4" data-aos="fade-up" data-aos-delay="500">
                 <div class="flex gap-10 items-center">
                     <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=150&h=150&q=80" class="w-20 h-20 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     <div>
@@ -215,11 +223,11 @@
     </section>
 
     <section class="py-32 px-6 lg:px-20 bg-white">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto" data-aos="zoom-in">
             <h2 class="font-serif italic text-6xl mb-12 interactive-text">Temukan Kami.</h2>
             <div class="img-reveal w-full h-[450px] grayscale hover:grayscale-0 transition-all duration-1000">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.58784347565!2d116.7583646!3d-1.2330556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df140889c89428b%3A0xb30f074d28362678!2sPenajam%2C%20Kabupaten%20Penajam%20Paser%20Utara%2C%20Kalimantan%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15958.455485906354!2d116.7570889!3d-1.2202613!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2df13d5089f81647%3A0xe67756f700938f2a!2sPenajam%2C%20Penajam%20Paser%20North%20Regency%2C%20East%20Kalimantan!5e0!3m2!1sen!2sid!4v1715800000000!5m2!1sen!2sid" 
                     width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
             </div>
@@ -227,7 +235,7 @@
     </section>
 
     <footer class="py-20 px-6 lg:px-20 border-t border-black/5 bg-[#fdfcf9]">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-20">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-20" data-aos="fade-up">
             <div class="md:col-span-2">
                 <h1 class="logo font-serif italic text-4xl mb-10 interactive-text">Core Coffee.</h1>
                 <p class="max-w-xs text-xs leading-loose opacity-60 uppercase tracking-widest">
@@ -245,20 +253,29 @@
             <div>
                 <h5 class="text-[10px] font-black uppercase tracking-[0.4em] mb-8">Sapa Kami</h5>
                 <div class="flex flex-wrap gap-6 text-xl">
-                    <a href="#" class="interactive-text transition hover:text-pink-600"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="interactive-text transition hover:text-green-500"><i class="fa-brands fa-whatsapp"></i></a>
-                    <a href="#" class="interactive-text transition hover:text-blue-600"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="#" class="interactive-text transition hover:text-black"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="mailto:halo@corecoffee.com" class="interactive-text transition hover:text-red-500"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="#" class="interactive-text transition hover:text-pink-600 hover:scale-125"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="interactive-text transition hover:text-green-500 hover:scale-125"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" class="interactive-text transition hover:text-blue-600 hover:scale-125"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="interactive-text transition hover:text-black hover:scale-125"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="mailto:halo@corecoffee.com" class="interactive-text transition hover:text-red-500 hover:scale-125"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
         </div>
-        <div class="mt-20 pt-10 border-t border-black/5 text-[9px] font-black tracking-[0.5em] uppercase opacity-30">
+        <div class="mt-20 pt-10 border-t border-black/5 text-center text-[9px] font-black tracking-[0.5em] uppercase opacity-30">
             © 2026 CORE COFFEE. — KOPI LEBIH BAIK, HARI LEBIH BAIK.
         </div>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Inisialisasi AOS
+        AOS.init({
+            once: false, // Animasi akan terulang setiap kali scroll ke atas/bawah
+            mirror: true,
+            duration: 800,
+            offset: 100
+        });
+
         window.addEventListener('scroll', function() {
             const logo = document.getElementById('main-logo');
             if (window.scrollY > 50) {
